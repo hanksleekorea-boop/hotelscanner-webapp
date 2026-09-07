@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102a43"><meta name="description" content="HotelScanner — 표본 데이터로 숙소 조건과 총액을 비교하는 무료 의사결정 도구">
+  <link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="./styles.css">
+  <title>HotelScanner | 숙소 비교 표본판</title>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+  <header class="topbar"><div class="wrap topbar-inner"><a class="brand" href="./"><span class="logo">H</span><span>HotelScanner</span></a><nav aria-label="주요 메뉴"><a href="#records">내 기록</a><a href="#about">사용 안내</a></nav></div></header>
+  <main id="main" class="wrap">
+    <section class="hero" aria-labelledby="title"><div><p class="eyebrow">FREE MVP · H1 COMPLETE BUILD</p><h1 id="title">숙소의 <em>실제 비교 조건</em>을 한눈에</h1><p class="lead">총액, 환불, 조식, 결제시점을 같은 조건으로 정리합니다. 지금은 외부 키 없이 작동하는 <strong>교육용 표본판</strong>입니다.</p></div><div class="hero-note" role="status"><strong>실시간 가격 대기</strong><span>공급자 승인·키가 준비되면 서버 경계에서만 연결합니다.</span></div></section>
+    <section class="search-panel" aria-labelledby="search-title"><div class="section-heading"><div><p class="eyebrow">01 · SEARCH INTENT</p><h2 id="search-title">어디에서, 언제 묵나요?</h2></div><span class="status-pill sample">SAMPLE_ONLY</span></div>
+      <form id="search-form" novalidate><div class="field-grid">
+        <label class="field wide">목적지<input id="destination" name="destination" list="destinations" placeholder="예: 서울, 부산, 제주" autocomplete="off" required><datalist id="destinations"><option value="서울"><option value="부산"><option value="제주"><option value="도쿄"><option value="방콕"></datalist><small id="destination-error" class="error" aria-live="polite"></small></label>
+        <label class="field">체크인<input id="checkIn" name="checkIn" type="date" value="2026-10-10" required><small id="checkIn-error" class="error" aria-live="polite"></small></label>
+        <label class="field">체크아웃<input id="checkOut" name="checkOut" type="date" value="2026-10-12" required><small id="checkOut-error" class="error" aria-live="polite"></small></label>
+        <label class="field">객실 수<input id="rooms" name="rooms" type="number" min="1" max="8" value="1" required></label>
+        <label class="field">성인<input id="adults" name="adults" type="number" min="1" max="24" value="2" required></label>
+        <label class="field">아동<input id="children" name="children" type="number" min="0" max="12" value="0" required></label>
+        <label class="field">통화<select id="currency" name="currency"><option value="KRW">KRW · 원</option><option value="USD">USD · 달러</option></select></label>
+        <label class="field">여행 목적<select id="purpose" name="purpose"><option value="GENERAL">전체</option><option value="도심">도심·업무</option><option value="휴식">휴식</option><option value="문화">문화·도보</option><option value="쇼핑">쇼핑·식사</option></select></label>
+      </div><div class="form-actions"><p id="form-status" class="muted" role="status">표본 검색은 외부 네트워크를 사용하지 않습니다.</p><button class="button primary" type="submit">표본 결과 보기 <span aria-hidden="true">→</span></button></div></form>
+    </section>
+
+    <section id="results-section" class="results-section" aria-labelledby="results-title"><div class="section-heading"><div><p class="eyebrow">02 · DECISION BOARD</p><h2 id="results-title">조건에 맞는 표본 숙소</h2></div><div class="heading-actions"><label class="compact">정렬<select id="sort"><option value="total">알려진 총액 낮은 순</option><option value="refund">환불 조건 우선</option><option value="purpose">목적 일치 우선</option></select></label><button id="compare-open" class="button ghost" type="button">비교함 <span id="compare-count">0</span></button></div></div>
+      <div class="notice" role="note"><strong>표본 데이터 안내</strong><span>아래 금액은 실제 판매처 가격이 아닙니다. <b>최저가 보장·예약·결제·제휴 수익</b>을 의미하지 않으며, 동일 조건의 읽을 수 있는 총액만 비교합니다.</span></div>
+      <div id="filter-bar" class="filter-bar" aria-label="결과 필터"><label><input id="refundable" type="checkbox"> 무료 취소만</label><label><input id="breakfast" type="checkbox"> 조식 포함만</label><button id="clear-filters" class="text-button" type="button">필터 초기화</button></div>
+      <div id="results" class="results" aria-live="polite"></div>
+    </section>
+
+    <section id="records" class="records-section" aria-labelledby="records-title"><div class="section-heading"><div><p class="eyebrow">03 · LOCAL MEMORY</p><h2 id="records-title">내 결정 기록</h2></div><div class="heading-actions"><button id="export-records" class="button ghost" type="button">JSON 내보내기</button><label class="button ghost file-button">JSON 가져오기<input id="import-records" type="file" accept="application/json" hidden></label></div></div><p class="muted">로그인 없이 이 기기에만 저장됩니다. 카드·여권·예약번호·연락처는 저장하지 않습니다.</p><div id="records-list" class="records-list"></div></section>
+
+    <section id="about" class="about-grid"><article class="info-card"><p class="eyebrow">정직한 상태</p><h2>왜 표본판인가요?</h2><p>실시간 최저가를 말하려면 승인된 공급자, 최신 재확인, 총액 정책이 필요합니다. 그 관문이 열리기 전까지 HotelScanner는 가짜 가격 대신 명확한 표본과 비교 규칙만 제공합니다.</p></article><article class="info-card"><p class="eyebrow">다음 단계</p><h2>공급자 연결은 별도 관문</h2><ul><li>Agoda Demand MSE 상업 승인</li><li>서버 전용 키·재확인·요청 한도</li><li>고지·철회·허용 도메인 검토</li></ul><p class="muted">승인 전에는 외부 요청과 판매처 이동을 실행하지 않습니다.</p></article></section>
+  </main>
+  <footer class="footer"><div class="wrap footer-inner"><span>HotelScanner H1 · 2026-09-07 · SAMPLE_ONLY</span><span>AirScanner와 별도 작업영역 · 결제·Apple 로그인·B 드라이브 제외</span></div></footer>
+  <div id="detail-dialog" class="dialog-backdrop" hidden><section class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-title"><button class="dialog-close" id="dialog-close" type="button" aria-label="닫기">×</button><div id="dialog-content"></div></section></div>
+  <style>.dialog-backdrop[hidden]{display:none!important}</style>
+  <script type="module" src="./main.js?v=h1-3"></script>
+</body></html>

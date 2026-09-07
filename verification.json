@@ -1,0 +1,19 @@
+{
+  "product": "HotelScanner",
+  "build": "h1-h2-h3-internal-v1",
+  "status": "SAMPLE_ONLY",
+  "phases": {
+    "H1": "15/15 COMPLETE_INTERNAL",
+    "H2": "10/10 COMPLETE_INTERNAL_EXTERNAL_WAITING",
+    "H3": "5/5 COMPLETE_INTERNAL_EXTERNAL_WAITING"
+  },
+  "externalGate": "WAITING_EXTERNAL",
+  "generatedAt": "2026-09-07T10:12:15.724Z",
+  "forbidden": [
+    "B-drive",
+    "Apple login",
+    "payment",
+    "booking",
+    "Hotellook API"
+  ]
+}
