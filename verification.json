@@ -2,15 +2,17 @@
   "product": "HotelScanner",
   "build": "h1-h2-h3-internal-v1",
   "status": "SAMPLE_ONLY",
-  "hosting": "GitHub Pages via Cloudflare DNS",
+  "hosting": "GitHub Pages via Cloudflare DNS + Cloudflare Worker preview",
   "customDomain": "https://hotelscan.scanners.cc/",
+  "edgePreview": "https://hotelscanner-edge.hanksleekorea.workers.dev/",
+  "edgeVersion": "c12c877b",
   "phases": {
     "H1": "15/15 COMPLETE_INTERNAL",
     "H2": "10/10 COMPLETE_INTERNAL_EXTERNAL_WAITING",
     "H3": "5/5 COMPLETE_INTERNAL_EXTERNAL_WAITING"
   },
   "externalGate": "WAITING_EXTERNAL",
-  "generatedAt": "2026-09-07T11:01:34.664Z",
+  "generatedAt": "2026-09-07T12:16:42.972Z",
   "forbidden": [
     "B-drive",
     "Apple login",
